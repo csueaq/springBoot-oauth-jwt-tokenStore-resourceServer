@@ -37,14 +37,6 @@ public class ResourceServer extends ResourceServerConfigurerAdapter {
         resources.resourceId(RESOURCE_ID);
     }
 
-   /* @Bean
-    public RemoteTokenServices remoteTokenServices() {
-        RemoteTokenServices rts = new RemoteTokenServices();
-        rts.setClientId(clientId);
-        rts.setClientSecret(clientSecret);
-        rts.setCheckTokenEndpointUrl("http://localhost:8081/oauth/check_token");
-        return rts;
-    }*/
 
 }
 
