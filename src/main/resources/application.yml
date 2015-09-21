@@ -1,0 +1,13 @@
+oauth:
+    client:
+        id: some-api
+        secret: some-secret
+
+security:
+  oauth2:
+    resource:
+      jwt:
+        keyValue: |
+          -----BEGIN PUBLIC KEY-----
+          MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAyU3AP19ZZh0pBLeOG1iP/Q4rt2yE+zSFABfj3JTZF4yNewynoa0Gp661bkxPa68JtEm1o7zKXanQvzSuneqmfHecQSi4Qztqyv1t4D8Y1uXJrr2Lkupj+yBw2OrmPz6vV9Rd3yXjkBMfI2kdqMC1OYwIrL2UZAbxVV7aNHwSaw2efrbEqQ93RvIUcZDI0tm3YZEk8Us/7ZPTgKCQQkE0uF8aJzbR6oHJg5Dl6zhZvC2Jk+4Q4hvaWaZJzcVlCaazn03R44qExp43BPQNnLGWRp3Zcs2RM60mhcsrWes5pRjzVf9vTJ5uqyQhQQo04GOw5sUu8PO4e6+LT9ctI9f6fwIDAQAB
+          -----END PUBLIC KEY-----
