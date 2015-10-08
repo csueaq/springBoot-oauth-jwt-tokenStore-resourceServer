@@ -25,7 +25,6 @@ public class ResourceServer extends ResourceServerConfigurerAdapter {
     @Override // [3]
     public void configure(HttpSecurity http) throws Exception {
         http
-                // Just for laughs, apply OAuth protection to only 2 resources
                 .requestMatchers().antMatchers("/","/user/test").and()
                 .authorizeRequests()
                 .anyRequest().access("#oauth2.hasScope('read')"); //[4]
