@@ -25,10 +25,7 @@ public class UserController {
     @ResponseBody
     public User test (OAuth2Authentication authentication) {
 
-        User testUser = new User();
-        testUser.setAge(100);
-        testUser.setEmail(((HashMap) authentication.getPrincipal()).get("email").toString());
-        return testUser;
+        return (User) authentication.getPrincipal();
     }
 
 }
