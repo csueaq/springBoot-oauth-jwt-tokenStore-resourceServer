@@ -26,7 +26,7 @@ public class CustomUserAuthenticationConvertor extends DefaultUserAuthentication
             Collection<? extends GrantedAuthority> authorities = getAuthorities(map);
             return new UsernamePasswordAuthenticationToken(principal, "N/A", authorities);
         }
-        return null;
+        return super.extractAuthentication(map);
     }
 
     // copied as is, because its not protected
