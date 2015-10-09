@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
@@ -23,6 +24,7 @@ import java.security.KeyPair;
  */
 @Configuration
 @EnableResourceServer // [2]
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class ResourceServer extends ResourceServerConfigurerAdapter {
 
     private static final String RESOURCE_ID = "client_resource";
@@ -77,9 +79,7 @@ public class ResourceServer extends ResourceServerConfigurerAdapter {
     @Override // [3]
     public void configure(HttpSecurity http) throws Exception {
         http
-                .requestMatchers().antMatchers("/", "/user/test").and()
-                .authorizeRequests()
-                .anyRequest().access("#oauth2.hasScope('read')"); //[4]
+                .authorizeRequests().anyRequest().permitAll();
     }
 
 

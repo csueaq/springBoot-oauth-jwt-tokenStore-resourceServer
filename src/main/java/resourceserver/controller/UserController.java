@@ -1,6 +1,7 @@
 package resourceserver.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.jwt.JwtHelper;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.security.oauth2.provider.token.AuthorizationServerTokenServices;
@@ -23,7 +24,16 @@ public class UserController {
 
     @RequestMapping(value = USER_URL_PATH + "/test", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
+    @PreAuthorize("hasRole('ROLE_USER') and #oauth2.hasScope('SIGNED_IN')")
     public User test (OAuth2Authentication authentication) {
+
+        return (User) authentication.getPrincipal();
+    }
+
+    @RequestMapping(value = USER_URL_PATH + "/test2", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    @PreAuthorize("hasRole('ROLE_USER') and #oauth2.hasScope('REMEMBERED')")
+    public User test2 (OAuth2Authentication authentication) {
 
         return (User) authentication.getPrincipal();
     }
