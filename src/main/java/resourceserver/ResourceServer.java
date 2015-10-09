@@ -46,13 +46,9 @@ public class ResourceServer extends ResourceServerConfigurerAdapter {
 
     @Bean
     public JwtAccessTokenConverter accessTokenConverter() throws Exception{
-        //JwtAccessTokenConverter jwtAccessTokenConverter =  new CustomTokenEnhancer();
-        // use below to use vanilla jwt token
         JwtAccessTokenConverter jwtAccessTokenConverter =  new JwtAccessTokenConverter();
-
         jwtAccessTokenConverter.setAccessTokenConverter(getDefaultAccessTokenConverter());
-
-       // jwtAccessTokenConverter.setVerifierKey(pubKey);
+        jwtAccessTokenConverter.setVerifierKey(pubKey);
         jwtAccessTokenConverter.afterPropertiesSet();
         return jwtAccessTokenConverter;
     }
@@ -69,6 +65,15 @@ public class ResourceServer extends ResourceServerConfigurerAdapter {
         return new CustomUserAuthenticationConvertor();
     }
 
+
+    @Bean
+    public DefaultTokenServices defaultTokenServices() throws Exception{
+        final DefaultTokenServices defaultTokenServices = new DefaultTokenServices();
+        defaultTokenServices.setTokenEnhancer(accessTokenConverter());
+        defaultTokenServices.setTokenStore(tokenStore());
+        return defaultTokenServices;
+    }
+
     @Override // [3]
     public void configure(HttpSecurity http) throws Exception {
         http
@@ -81,9 +86,8 @@ public class ResourceServer extends ResourceServerConfigurerAdapter {
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
 
-        //tokenServices.setTokenStore(tokenStore());
         resources
-                .tokenServices(tokenServices)
+                .tokenServices(defaultTokenServices())
                 .tokenStore(tokenStore())
                 .resourceId(RESOURCE_ID);
     }

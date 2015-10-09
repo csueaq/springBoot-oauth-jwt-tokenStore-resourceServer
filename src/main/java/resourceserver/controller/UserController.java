@@ -25,9 +25,6 @@ public class UserController {
     @ResponseBody
     public User test (OAuth2Authentication authentication) {
 
-//        String email = tokenServices.getAccessToken(authentication).getAdditionalInformation().get("user_name").toString();
-
-        //JwtHelper.decode()
         User testUser = new User();
         testUser.setAge(100);
         testUser.setEmail(((HashMap) authentication.getPrincipal()).get("email").toString());
